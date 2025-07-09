@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Hero</title>
+</head>
+<body>
+        <form  action="http://localhost:3000/api/heroes/actualizar/<%= hero._id || hero.id %>?_method=PUT" method="post">
+
+        
+            <input type="text" placeholder="Ingrese el nombre de superheroe" name="nombreSuperHeroe" value="<%= hero.nombreSuperHeroe %>"><br>
+        <% errors.filter(e => e.path === 'nombreSuperHeroe').forEach(e=>{ %>
+            <span><%= e.msg %></span> <br>
+        <% }) %>
+        <input type="text" placeholder="Ingrese el nombre real" name="nombreReal" value="<%= hero.nombreReal %>"><br>
+        <% errors.filter(e => e.path === 'nombreReal').forEach(e=>{ %>
+            <span><%= e.msg %></span> <br>
+        <% }) %>
+        <input type="number" placeholder="Ingrese la edad" name="edad" value="<%= hero.edad %>"><br>
+        <% errors.filter(e => e.path === 'edad').forEach(e=>{ %>
+            <span><%= e.msg %></span> <br>
+        <% }) %>
+        <input type="text" placeholder="Ingrese planeta origen" name="planetaOrigen" value="<%= hero.planetaOrigen %>"><br>
+        <input type="text" placeholder="Ingrese la debilidad" name="debilidad" value="<%= hero.debilidad %>"><br>
+        <input type="text" placeholder="Ingrese la poderes (por -)" name="poderes" value="<%= Array.isArray(hero.poderes)  ? hero.poderes.join('-') : (hero.poderes || '') %>"> <br>
+        <% errors.filter(e => e.path === 'poderes').forEach(e=>{ %>
+            <span><%= e.msg %></span> <br>
+        <% }) %>
+        <input type="text" placeholder="Ingrese los aliados (por -)" name="aliados" value="<%= Array.isArray(hero.aliados) ? hero.aliados.join('-') : (hero.aliados || '') %>"> <br>
+        <input type="text" placeholder="Ingrese los enemigos (por -)" name="enemigos" value="<%= Array.isArray(hero.enemigos)  ? hero.enemigos.join('-') : (hero.enemigos || '') %>"> <br>
+        <button type="submit">Actualizar Heroe</button>
+    </form>
+</body>
+</html>

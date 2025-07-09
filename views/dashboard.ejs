@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado Superheroes</title>
+</head>
+<body>
+    <% if (msg) { %>
+  <div style="background-color: #d4edda; color: #155724; padding: 10px; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 10px;">
+    <%= msg %>
+  </div>
+<% } %>
+
+    <h2>Lista de SuperHeroes</h2>
+
+
+        <%  superheroesFormateados.forEach(hero => { %>
+            <form action="http://localhost:3000/api/heroes/eliminar/id/<%= hero.Id %>?_method=DELETE" method="post">
+                <div> 
+               <h3><%= hero.Nombre %></h3>
+               <p>Nombre Real: <%= hero.nombreReal %></p>
+               <p>Edad: <%= hero.Edad %></p>
+               <p>Planeta Origen: <%= hero.planetaOrigen %></p> 
+                <p>Debilidad: <%= hero.Debilidad %></p>
+                <p>Poderes:  <%= hero.Poderes.join(', ') %></p>
+                <p>Aliados:  <%= hero.Aliados.join(', ') %></p>
+                <p>Enemigos:  <%= hero.Enemigos.join(', ') %></p>
+            
+                <a href="http://localhost:3000/api/heroes/editarHeroe/<%= hero.Id %>" style="text-decoration: none;"> Editar </a> 
+                <button type="submit">Eliminar</button>
+            </div>
+            </form>
+             
+             <% }); %>
+            
+    <h2>Desea agrandar su lista de superheroes?</h2>
+    <a href="http://localhost:3000/api/heroes/nuevoHeroe">Agregue SuperHeroe</a>       
+       
+   
+</body>
+</html>

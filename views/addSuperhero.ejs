@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+
+    <form  action="http://localhost:3000/api/heroes/insertar" method="POST">
+        <input type="text" placeholder="Ingrese el nombre de superheroe" name="nombreSuperHeroe"><br>
+        <% errors.filter(e => e.path === 'nombreSuperHeroe').forEach(e=>{ %>
+            <span><%= e.msg %></span> <br>
+        <% }) %>
+        <input type="text" placeholder="Ingrese el nombre real" name="nombreReal"><br>
+        <% errors.filter(e => e.path === 'nombreReal').forEach(e=>{ %>
+            <span><%= e.msg %></span> <br>
+        <% }) %>
+        <input type="number" placeholder="Ingrese la edad" name="edad"><br>
+        <% errors.filter(e => e.path === 'edad').forEach(e=>{ %>
+            <span><%= e.msg %></span> <br>
+        <% }) %>
+        <input type="text" placeholder="Ingrese planeta origen" name="planetaOrigen"><br>
+        <input type="text" placeholder="Ingrese la debilidad" name="debilidad"><br>
+        <input type="text" placeholder="Ingrese la poderes (por -)" name="poderes"> <br>
+        <% errors.filter(e => e.path === 'poderes').forEach(e=>{ %>
+            <span><%= e.msg %></span> <br>
+        <% }) %>
+        <input type="text" placeholder="Ingrese los aliados (por -)" name="aliados"> <br>
+        <input type="text" placeholder="Ingrese los enemigos (por -)" name="enemigos"> <br>
+        <button type="submit">Crear Heroe</button>
+    </form>
+</body>
+</html>
