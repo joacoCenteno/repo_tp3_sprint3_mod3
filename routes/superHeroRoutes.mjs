@@ -7,29 +7,21 @@ import{
     insertarSuperHeroeController,
     eliminarSuperHeroeIdController,
     eliminarSuperHeroeNombreController,
-    actualizarSuperHeroeController
+    actualizarSuperHeroeController,
+    nuevoHeroeFormController,
+    editarHeroeFormController
 } from '../controllers/superheroesController.mjs';
 import {registerValidationRules} from '../validations/validationRules.mjs';
 import {handleValidationErrors} from '../error_middle/errorMiddleware.mjs'
 
-//Borrar
-import { obtenerSuperheroePorId} from '../services/superheroesServices.mjs';
 
 
 const router = express.Router();
 
 
-router.get('/heroes/editarHeroe/:id', async (req,res)=>{
-    const {id} = req.params;
-    const heroe =  await obtenerSuperheroePorId(id);
-    
-    res.render('editSuperhero',{errors:[], hero:heroe});
-})
+router.get('/heroes/editarHeroe/:id', editarHeroeFormController);
+router.get('/heroes/nuevoHeroe',nuevoHeroeFormController);
 
-
-router.get('/heroes/nuevoHeroe',(req,res)=>{
-    res.render('addSuperhero', {errors:[], datos:{}});
-})
 
 router.get('/heroes', obtenerTodosLosSuperheroesController);
 router.get('/heroes/mayoresA30', obtenerSuperheroesMayoresDe30Controller);
