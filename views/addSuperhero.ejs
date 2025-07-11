@@ -4,31 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
-<body>
 
-    <form  action="http://localhost:3000/api/heroes/insertar" method="POST">
-        <input type="text" placeholder="Ingrese el nombre de superheroe" name="nombreSuperHeroe"><br>
+<body class="flex justify-center items-center h-screen">
+    
+    <form  action="http://localhost:3000/api/heroes/insertar" method="POST" class="flex flex-col py-10">
+        <h2 class="text-2xl text-center font-semibold text-green-400 ">Formulario de Nuevo Heroe</h2>
+        <label for="nombreSuperHeroe" class="text-sm mt-5">Nombre del Supherheroe</label><br>
+        <input type="text" id="nombreSuperHeroe" name="nombreSuperHeroe" value="<%= hero.nombreSuperHeroe || ''%>" class="w-100 mt-1 border border-green-100 text-green-300"><br>
         <% errors.filter(e => e.path === 'nombreSuperHeroe').forEach(e=>{ %>
-            <span><%= e.msg %></span> <br>
+            <span class="text-xs text-red-400"><%= e.msg %></span> <br>
         <% }) %>
-        <input type="text" placeholder="Ingrese el nombre real" name="nombreReal"><br>
+
+        <label for="nombreReal" class="text-sm mt-2">Nombre Real</label><br>
+        <input type="text" id="nombreReal" name="nombreReal" value="<%= hero.nombreReal || '' %>" class="w-100 mt-1 border border-green-100 text-green-300"><br>
         <% errors.filter(e => e.path === 'nombreReal').forEach(e=>{ %>
-            <span><%= e.msg %></span> <br>
+            <span class="text-xs text-red-400"><%= e.msg %></span> <br>
         <% }) %>
-        <input type="number" placeholder="Ingrese la edad" name="edad"><br>
+
+        <label for="edad" class="text-sm mt-2">Edad del Supherheroe</label><br>
+        <input type="number" id="edad" name="edad" value="<%= hero.edad || '' %>" class="w-100 mt-1 border border-green-100 text-green-300"><br>
         <% errors.filter(e => e.path === 'edad').forEach(e=>{ %>
-            <span><%= e.msg %></span> <br>
+            <span class="text-xs text-red-400"><%= e.msg %></span> <br>
         <% }) %>
-        <input type="text" placeholder="Ingrese planeta origen" name="planetaOrigen"><br>
-        <input type="text" placeholder="Ingrese la debilidad" name="debilidad"><br>
-        <input type="text" placeholder="Ingrese la poderes (por -)" name="poderes"> <br>
+
+        <label for="planetaOrigen" class="text-sm mt-2">Plantea Origen del Supherheroe</label><br>
+        <input type="text" id="planetaOrigen" name="planetaOrigen" value="<%= hero.planetaOrigen || '' %>" class="w-100 mt-1 border border-green-100 text-green-300"><br>
+        
+        <label for="debilidad" class="text-sm mt-2">Debilidad del Supherheroe</label><br>
+        <input type="text" id="debilidad" name="debilidad" value="<%= hero.debilidad || '' %>" class="w-100 mt-1 border border-green-100 text-green-300"><br>
+        
+        <label for="poderes" class="text-sm mt-2">Poderes del Supherheroe (separados por -)</label><br>
+        <input type="text" id="poderes" name="poderes" value="<%= (Array.isArray(hero.poderes)  ? hero.poderes.join('-') : (hero.poderes || '')) || '' %>" class="w-100 mt-1 border border-green-100 text-green-300"> <br>
         <% errors.filter(e => e.path === 'poderes').forEach(e=>{ %>
-            <span><%= e.msg %></span> <br>
+            <span class="text-xs text-red-400"><%= e.msg %></span> <br>
         <% }) %>
-        <input type="text" placeholder="Ingrese los aliados (por -)" name="aliados"> <br>
-        <input type="text" placeholder="Ingrese los enemigos (por -)" name="enemigos"> <br>
-        <button type="submit">Crear Heroe</button>
+
+        <label for="poderes" class="text-sm mt-2" >Aliados del Supherheroe (separados por -)</label><br>
+        <input type="text" id="aliados" name="aliados" value="<%= (Array.isArray(hero.aliados)  ? hero.aliados.join('-') : (hero.aliados || '')) || '' %>" class="w-100 mt-1 border border-green-100 text-green-300"> <br>
+        
+        <label for="poderes" class="text-sm mt-2">Enemigos del Supherheroe (separados por -)</label><br>
+        <input type="text" id="enemigos" name="enemigos" value="<%= (Array.isArray(hero.enemigos)  ? hero.enemigos.join('-') : (hero.enemigos || '')) || '' %>" class="w-100 mt-1 border border-green-100 text-green-300"> <br>
+        
+        <div class="flex justify-end items-center gap-5 mt-4">
+            <a href="http://localhost:3000/api/heroes"  class="text-white bg-blue-400 py-1 px-4 rounded-xs">Retroceder</a>
+        <button type="submit" class="text-white bg-green-400 py-1 px-4 rounded-xs cursor-pointer">Crear Heroe</button>
+        </div>
+        
     </form>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </html>
