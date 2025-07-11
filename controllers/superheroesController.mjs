@@ -26,7 +26,7 @@ export async function obtenerTodosLosSuperheroesController(req, res){
         const superheroesFormateados = renderizarListaSuperheroes(superheroes);
         res.render('dashboard', { superheroesFormateados, msg: req.query.msg });
     }catch(err){
-        res.status(500).send({mensaje: 'Error al obtener los superheroes', error: err.message});
+        res.status(500).redirect('/api/heroes?msg=Error al obtener los heroes :(');
     }
 }
 
@@ -106,7 +106,7 @@ export async function actualizarSuperHeroeController(req,res){
             enemigos: procesarPoder('enemigos')});
 
         if(!heroe_actualizado){
-            return res.status(404).send({mensaje: 'Superheroe no actualizado'});
+            return res.status(404).redirect('/api/heroes?msg=Error al actualizar el heroe :(');
         }
 
         res.status(200).redirect('/api/heroes?msg=Heroe actualizado con éxito!');
@@ -145,4 +145,15 @@ export async function eliminarSuperHeroeNombreController(req,res){
     }catch(err){
         res.status(500).send({mensaje:'Error al eliminar el superheroe por nombre'});
     }
+}
+
+export function nuevoHeroeFormController(req,res){
+    res.render('addSuperhero', {errors:[], hero:{}});
+}
+
+export async function editarHeroeFormController(req,res){
+    const {id} = req.params;
+    const heroe =  await obtenerSuperheroePorId(id);
+    
+    res.render('editSuperhero',{errors:[], hero:heroe});
 }
